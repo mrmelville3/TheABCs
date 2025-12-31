@@ -1,4 +1,4 @@
 node_modules/
 static/
-/static/!404.html
+!/static/404.html
 dist/bundle.js
