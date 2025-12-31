@@ -6,19 +6,20 @@ function NavAndMainPane() {
 	
 	// NEXT: get this from a new api for table of contents. doon't need pageImageLoc and pageText here.
 	// shoudl not use PageData. Should be TableOfContnets or some other new object/schema/type.
+	/*
 	const pagesData: PageData[] =  [
 		{pageId: 0, name: 'Introduction', pageImageLoc: '', pageText: '' },
 		{pageId: 1, name: 'A is for...', pageImageLoc: '', pageText: '' },
 		{pageId: 2, name: 'B is for...', pageImageLoc: '', pageText: '' },
 		{pageId: 3, name: 'C is for...', pageImageLoc: '', pageText: '' },
 	];
-	
-	const [activeTab, setActiveTab] = useState(0);
+	*/
+	const [activeTab, setActiveTab] = useState(1);
 	
 	return (
 	<div className="container">
-		<LeftsideNav updateActiveTab={setActiveTab} activeTabId={activeTab} navItems={pagesData} />
-		<LetterPage pageId={activeTab} />
+		<LeftsideNav updateActiveTab={setActiveTab} activeTabId={activeTab} />
+		<LetterPage page_id={activeTab} />
 	</div>
 	);
 }

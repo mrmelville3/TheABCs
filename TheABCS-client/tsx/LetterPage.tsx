@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 interface LetterPageProps {
-	pageId: number;
+	page_id: number;
 }
 
 interface PageData {
-	pageId: number;
+	page_id: number;
 	name: string;
-	pageImageLoc: string;
-	pageText: string;
+	page_image_loc: string;
+	page_teext: string;
 }
 
-function LetterPage({pageId}: LetterPageProps) {
+function LetterPage({page_id}: LetterPageProps) {
 	
 	
-  console.log('page id', pageId);
-  
+  // console.log('page id', page_id);
 
   const [page, setPage] = useState<PageData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -26,8 +25,8 @@ function LetterPage({pageId}: LetterPageProps) {
     const fetchUser = async () => {
       try {
         setLoading(true);
-		console.log("pageId", pageId);
-        const response = await fetch(`/api/pagedata/${pageId}`);
+		//console.log("page_id", page_id);
+        const response = await fetch(`/api/pagedata/${page_id}`);
         
         if (!response.ok) {
           throw new Error('Page not found');
@@ -43,16 +42,17 @@ function LetterPage({pageId}: LetterPageProps) {
     };
 
     fetchUser();
-  }, [pageId]); // The effect re-runs if pageId changes
+  }, [page_id]); // The effect re-runs if pageId changes
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
+console.log("name: ", page);
 	return (
 	  <div className="letter-page">
 		<h1>{page.name}</h1>
-		<img src={page.pageImageLoc} alt="Letter Image" />
-		<p>{page.pageText}</p>
+		<img src={page.page_image_loc} alt="Letter Image" />
+		<p>{page.page_teext}</p>
 	  </div>
 	);
 }

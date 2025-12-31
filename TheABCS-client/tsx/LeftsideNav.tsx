@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PageData } from './LetterPage';
 
 interface tocEntry {
-	pageId: number;
+	page_id: number;
 	name: string;
 }
 
@@ -38,7 +38,7 @@ function LeftsideNav({updateActiveTab, activeTabId}: LeftsideNavProps) {
     };
 
     fetchTocData();
-  }, []); // The effect re-runs if pageId changes
+  }, []); 
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -48,8 +48,8 @@ function LeftsideNav({updateActiveTab, activeTabId}: LeftsideNavProps) {
 		  <div className="sidebar-content">
 			<ul className="nav-list">
 			  {tocEntries.map((item) => (
-				<li key={item.pageId} className="nav-item">
-				  <a onClick={() => updateActiveTab(item.pageId)} href="#" className={`nav-link ${item.pageId === activeTabId ? 'active' : ''}`}>
+				<li key={item.page_id} className="nav-item">
+				  <a onClick={() => updateActiveTab(item.page_id)} href="#" className={`nav-link ${item.page_id === activeTabId ? 'active' : ''}`}>
 					<span className="nav-label">{item.name}</span>
 				  </a>
 				</li>
