@@ -1,0 +1,4 @@
+node_modules/
+static/
+!404.html
+dist/bundle.js
