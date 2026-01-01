@@ -2,11 +2,6 @@ import React from 'react';
 
 function AbcHeader() {
 	
-	function showAlertBox() {
-		alert('Alert!');
-	}
-	
-	
 	return (
 		<header className="app-header">
 			<div className="app-header-left">

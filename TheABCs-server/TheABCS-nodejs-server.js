@@ -60,6 +60,7 @@ const server = http.createServer(async (req, res) => {
 		const page = await pool.query('SELECT * FROM page WHERE page_id=' + recordId);
         res.writeHead(200, { 'Content-Type': 'application/json' });
 		if(page.rows.length===1) {
+			console.log("Response: ", page.rows[0])
 			return res.end(JSON.stringify(page.rows[0]));
 		}
         else{
