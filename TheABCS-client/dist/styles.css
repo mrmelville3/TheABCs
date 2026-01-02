@@ -6,12 +6,12 @@
   align-items: center;           /* Centers items vertically */
   border-bottom: 1px solid #4B5564;
 }
+
 .container {
   display: flex;
   align-items: flex-start; /* Aligns both to the top */
   width: 100%;
 }
-
 .nav-list {
   list-style-type: none; /* Removes bullets */
 }

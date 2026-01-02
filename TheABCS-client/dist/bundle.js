@@ -21449,21 +21449,21 @@
     }
   });
 
-  // tsx/index.tsx
+  // jsx/index.jsx
   var import_react5 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
-  // tsx/AbcHeader.tsx
+  // jsx/AbcHeader.jsx
   var import_react = __toESM(require_react());
   function AbcHeader() {
     return /* @__PURE__ */ import_react.default.createElement("header", { className: "app-header" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "app-header-left" }, /* @__PURE__ */ import_react.default.createElement("img", { src: "./images/logo.png", alt: "Logo" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "app-header-middle" }, /* @__PURE__ */ import_react.default.createElement("h1", null, "The ABC's")), /* @__PURE__ */ import_react.default.createElement("div", { className: "app-header-right" }, /* @__PURE__ */ import_react.default.createElement("img", { src: "./images/user.png", alt: "Logo" })));
   }
   var AbcHeader_default = AbcHeader;
 
-  // tsx/NavAndMainPane.tsx
+  // jsx/NavAndMainPane.jsx
   var import_react4 = __toESM(require_react());
 
-  // tsx/LeftsideNav.tsx
+  // jsx/LeftsideNav.jsx
   var import_react2 = __toESM(require_react());
   function LeftsideNav({ updateActiveTab, activeTabId }) {
     const [tocEntries, setTocEntries] = (0, import_react2.useState)(null);
@@ -21489,11 +21489,11 @@
     }, []);
     if (loading) return /* @__PURE__ */ import_react2.default.createElement("p", null, "Loading...");
     if (error) return /* @__PURE__ */ import_react2.default.createElement("p", null, "Error: ", error);
-    return /* @__PURE__ */ import_react2.default.createElement("nav", { className: "sidebar" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "sidebar-content" }, /* @__PURE__ */ import_react2.default.createElement("ul", { className: "nav-list" }, tocEntries.map((item) => /* @__PURE__ */ import_react2.default.createElement("li", { key: item.page_id, className: "nav-item" }, /* @__PURE__ */ import_react2.default.createElement("a", { onClick: () => updateActiveTab(item.page_id), href: "#", className: `nav-link ${item.page_id === activeTabId ? "active" : ""}` }, /* @__PURE__ */ import_react2.default.createElement("span", { className: "nav-label" }, item.name)))))));
+    return /* @__PURE__ */ import_react2.default.createElement("nav", { className: "sidebar" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "sidebar-content" }, /* @__PURE__ */ import_react2.default.createElement("ul", { className: "nav-list" }, tocEntries.map((item) => /* @__PURE__ */ import_react2.default.createElement("li", { key: item.pageId, className: "nav-item" }, /* @__PURE__ */ import_react2.default.createElement("a", { onClick: () => updateActiveTab(item.pageId), href: "#", className: `nav-link ${item.pageId === activeTabId ? "active" : ""}` }, /* @__PURE__ */ import_react2.default.createElement("span", { className: "nav-label" }, item.name)))))));
   }
   var LeftsideNav_default = LeftsideNav;
 
-  // tsx/LetterPage.tsx
+  // jsx/LetterPage.jsx
   var import_react3 = __toESM(require_react());
   function LetterPage({ page_id }) {
     const [page, setPage] = (0, import_react3.useState)(null);
@@ -21519,19 +21519,18 @@
     }, [page_id]);
     if (loading) return /* @__PURE__ */ import_react3.default.createElement("p", null, "Loading...");
     if (error) return /* @__PURE__ */ import_react3.default.createElement("p", null, "Error: ", error);
-    console.log("name: ", page);
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "letter-page" }, /* @__PURE__ */ import_react3.default.createElement("h1", null, page.name), /* @__PURE__ */ import_react3.default.createElement("img", { src: page.page_image_loc, alt: "Letter Image" }), /* @__PURE__ */ import_react3.default.createElement("p", null, page.page_teext));
+    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "letter-page" }, /* @__PURE__ */ import_react3.default.createElement("h1", null, page.name), /* @__PURE__ */ import_react3.default.createElement("img", { src: page.pageImageLoc, alt: "Letter Image" }), /* @__PURE__ */ import_react3.default.createElement("p", null, page.pageText));
   }
   var LetterPage_default = LetterPage;
 
-  // tsx/NavAndMainPane.tsx
+  // jsx/NavAndMainPane.jsx
   function NavAndMainPane() {
     const [activeTab, setActiveTab] = (0, import_react4.useState)(1);
     return /* @__PURE__ */ import_react4.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react4.default.createElement(LeftsideNav_default, { updateActiveTab: setActiveTab, activeTabId: activeTab }), /* @__PURE__ */ import_react4.default.createElement(LetterPage_default, { page_id: activeTab }));
   }
   var NavAndMainPane_default = NavAndMainPane;
 
-  // tsx/index.tsx
+  // jsx/index.jsx
   var root = (0, import_client.createRoot)(document.getElementById("root"));
   root.render(
     /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement(AbcHeader_default, null), /* @__PURE__ */ import_react5.default.createElement(NavAndMainPane_default, null))

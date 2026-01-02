@@ -1,13 +1,7 @@
-/*
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-*/
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import pool from './db.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,59 +9,55 @@ const __dirname = path.dirname(__filename);
 
 const PORT = 8080;
 
-const data = [
-	{pageId: 0, name: 'Introduction', pageImageLoc: './images/logo.png', pageText: 'This is the intro.' },
-	{pageId: 1, name: 'Z is for...', pageImageLoc: './images/apple.png', pageText: 'A is for apple.' },
-	{pageId: 2, name: 'B is for...', pageImageLoc: './images/boat.png', pageText: 'B is for boat.' },
-	{pageId: 3, name: 'C is for...', pageImageLoc: './images/cat.png', pageText: 'C is for cat.' }
-];
-
-// Define the function as async
-/*
-const getTableOfContents = async () => {
-  try {
-    const tocList = await pool.query('SELECT page_id, "name" FROM page ORDER BY page_id ASC');
-    return tocList.rows;
-  } catch (err) {
-    console.error("Query error", err);
-  }
-};
-*/
-
 const server = http.createServer(async (req, res) => {
 	
+	// ================================= START: API routing ==========================================
 	const urlParts = req.url.split('/'); 
 
-    // API Route
 	if(urlParts[1] === 'api' && req.method === 'GET') {
 		if(urlParts[2] === 'tableOfContents') {
-			//const tocList = data.map(({pageId, name}) => ({pageId, name}));
 			
-			const tocList = await pool.query('SELECT page_id, "name" FROM page ORDER BY page_id ASC');
+			//const tocList = data.map(({pageId, name}) => ({pageId, name}));
+			const tocData = await pool.query('SELECT pageid, "name" FROM Pages ORDER BY pageId ASC');
+			
+			//const tocList = tocData.rows.map(({pageid, name}) => ({pageId, name}));
+			
+			const tocList = tocData.rows.map(({ pageid, name }) => ({
+			  pageId: pageid, // Map lowercase 'pageid' to camelCase 'pageId'
+			  name: name
+			}));
 			
 			res.writeHead(200, { 'Content-Type': 'application/json' });
-			return res.end(JSON.stringify(tocList.rows));
+			return res.end(JSON.stringify(tocList));
+			
 		}
 		
-		if(urlParts.length < 4) {
-            res.writeHead(404);
-            return res.end('File Not Found');
+		if(urlParts[2] === 'pagedata') {
+			
+			const recordId = parseInt(urlParts[3])// - 1;
+			
+			const page = await pool.query('SELECT * FROM Pages WHERE pageId=' + recordId);
+			
+			if(page.rows.length===1) {
+				
+				console.log("Response: ", page.rows[0]) // console.log("Response: ", data[recordId])
+				
+				 // Map lowercase 'pageid' to camelCase 'pageId' and other fields
+				const pageData = {
+					pageId: page.rows[0].pageid,
+					name: page.rows[0].name,
+					pageImageLoc: page.rows[0].pageimageloc,
+					pageText: page.rows[0].pagetext
+				}
+				res.writeHead(200, { 'Content-Type': 'application/json' });
+				return res.end(JSON.stringify(pageData)); // return res.end(JSON.stringify(data[recordId]));
+			}
 		}
-		
-		const recordId = parseInt(urlParts[3]);
-		
-		//console.log('SELECT * FROM page WHERE page_id=' + recordId);
-		const page = await pool.query('SELECT * FROM page WHERE page_id=' + recordId);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-		if(page.rows.length===1) {
-			console.log("Response: ", page.rows[0])
-			return res.end(JSON.stringify(page.rows[0]));
-		}
-        else{
-            res.writeHead(404);
-            return res.end('File Not Found');
-		}
+
+		res.writeHead(404);
+		return res.end('File Not Found');
     }
+	// ================================= END: API routing ==========================================
 
     // Static File Handling
     let filePath = path.join(__dirname, 'static', req.url === '/' ? 'index.html' : req.url);
