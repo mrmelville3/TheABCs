@@ -1,10 +1,10 @@
-# The ABCs - Full Stack Web Applicaiton
+# The ABCs - A Simple Full Stack Web Applicaiton
 A full stack web app with client, server, and database . It's an alphabet book. The tech stack is similar to PERN (PostGreSQL, Express, React, Node.js) minus Express. There is also no React framework. One of the goals of this project was to use as few node installs as possible and keep it as simple as possible.  
   
 Project goals:
-- No react framework (node.js, vue, vite, etc.)
+- Use react and JSX with NO REACT FRAMEWORK (node.js, vue, vite, etc.)
 - keep npm installs to a minimum
-- use react and JSX
+- Use node.js 
 - use a database
 - use esbuild to build jsx react components into JavaScript bundle
 - create a node.js server to serve static files and also provide APIs
@@ -16,6 +16,7 @@ Project goals:
 - PostGreSQL - Download installer from https://www.postgresql.org/ 
 - Notepad++ (or notepad, I like notepad++ for the line numbers)
 - git and gitHub if you want a repository and change tracking
+
 ## Getting started
 These instructions are specific to Windows. I assume the same things can be done on other operating systems in similar fashion.
 
@@ -684,7 +685,7 @@ CREATE TABLE Pages (
     pageText TEXT
 );
 ```
-Find the "play" button. If you hover over it, it will show `exectue script`. Click it. The table is  created. Delete the CREATE TABLE command and replace it with this select statement: `Select * from Pages`. You shoule see an empty table displayed in the "Data Ouput" window below. Add the follow rows to this table using the UI of this view. The rows should look like this:
+Find the "play" button. If you hover over it, it will show `exectue script`. Click it. The table is  created. Delete the CREATE TABLE command and replace it with this select statement: `Select * from Pages`. You shoule see an empty table displayed in the "Data Ouput" window below. Add the following rows to this table using the UI of this view. The rows should look like this:
 
 ```
 "pageid"	"name"       	"pageimageloc"      	"pagetext"
@@ -843,3 +844,31 @@ server.listen(PORT, () => console.log(`Native server at http://localhost:${PORT}
 - Deploy: In Windows, copy bundle.js from `TheABCs\TheABCs-client\dist` into `TheABCs\TheABCs-server\static`. 
 - if you need to restart the server do that as before using command `node TheABCs-nodejs-server.js`. This must be run from the the folder `TheABCs\TheABCs-server\`.
 - In the internet browser, go to: http://localhost:8080/
+
+## Create Git and GitHub repositories
+### Create .gitignore file
+In the parent poject folder `TheABCs\` create a file called .gitignore. Add the following lines:
+```
+node_modules/
+static/
+dist/bundle.js
+.env
+```
+### Create repository in GitHub
+- go to https://github.com/ and log in
+- create no repository as public and NO README file
+- find the url for the repository under the green code button. It should look something like this: `https://github.com/[your-user-id]/TheABCs.git`. Copy it.
+
+### Initilize local git repo
+- open up a terminal in the parent poject folder `TheABCs\`
+- Create local git repo: In the terminal type: `git init -b main`
+- Check file list status: In the terminal type: `git status`
+- Add files identified in previous step to the repo: In the terminal type: `git add -A`
+- Check file list status: In the terminal type: `git status`
+- Create first snapshot: In the terminal type: `git commit -m "Initial commit"`
+
+### Connect local git to github
+- link local git repo to GitHub repo: `git remote add origin https://github.com/[your-user-id]/TheABCs.git`
+  - This https address is an example. You need to use the one copied from the github website in the previous section.
+- push changes to github: `git push -u origin main`
+NOTE: from this point foward, to checkin the latest changes to github, just use this command: `git push`
