@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function LeftsideNav({updateActiveTab, activeTabId}) {
 
-// ==================== START: fecth data from the API =========================
+// ==================== START: fetch data from the API =========================
 
 	const [tocEntries, setTocEntries] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ function LeftsideNav({updateActiveTab, activeTabId}) {
 
 		fetchTocData();
 	  }, []); 
-	// ==================== END: fecth data from the API =========================
+	// ==================== END: fetch data from the API =========================
 	
 	  if (loading) return <p>Loading...</p>;
 	  if (error) return <p>Error: {error}</p>;

@@ -1,27 +1,28 @@
 # The ABCs - A Simple Full Stack Web Applicaiton
-A full stack web app with client, server, and database . It's an alphabet book. The tech stack is similar to PERN (PostGreSQL, Express, React, Node.js) minus Express. There is also no React framework. One of the goals of this project was to use as few node installs as possible and keep it as simple as possible.  
+This is a full stack web app with client, server, and database . It's an alphabet book. The tech stack is similar to PERN (PostGreSQL, Express, React, Node.js) minus Express. There is also no React framework. One of the goals of this project was to use as few node installs as possible and keep it simple.  
   
 Project goals:
 - Use react and JSX with NO REACT FRAMEWORK (node.js, vue, vite, etc.)
-- keep npm installs to a minimum
-- Use node.js 
+- keep npm installs at a minimum
+- Use node.js to manage packages, build, and server implementation
 - use a database
 - use esbuild to build jsx react components into JavaScript bundle
 - create a node.js server to serve static files and also provide APIs
 - don't use VSCode or any IDE (do it the hard way to learn the benefits of an IDE)
   - instead, use notepad++, Windows PowerShell terminal, Chrome browser, Windows Explorer
+
 ## You will need
 - node.js - Download installer from https://nodejs.org/
   - needed for terminal commands: npm, npx, node
 - PostGreSQL - Download installer from https://www.postgresql.org/ 
 - Notepad++ (or notepad, I like notepad++ for the line numbers)
-- git and gitHub if you want a repository and change tracking
+- git and gitHub account if you want a repository and change tracking
 
 ## Getting started
 These instructions are specific to Windows. I assume the same things can be done on other operating systems in similar fashion.
 
 ### Setup Folder Structure For client and server projects
-Create folder for project (TheABCs). Inside that folder create two sub folders. One folder for the server application (TheABCs-server), one folder for the client (TheABCs-client). Continue and mimic this folder structure:
+Create a parent folder for the project (TheABCs). Inside that folder create two sub folders. One folder for the server application (TheABCs-server), one folder for the client (TheABCs-client). Continue and mimic this folder structure:
 
 - TheABCs (parent project folder)
   - TheABCs-client
@@ -30,11 +31,10 @@ Create folder for project (TheABCs). Inside that folder create two sub folders. 
     - jsx (for react components)
   - TheABCs-server
     - static (for static files)
-  - README.md (this file)
 
 ## Create Basic Front End in react
 ### Install react
-Navigate to `TheABCs/TheABCs-client` in Windows explorer. Right click and select 'open in terminal'. Type command:
+Navigate to `TheABCs/TheABCs-client` in Windows explorer. Right click in the empty file listing space and select 'open in terminal'. Type command:
 `npm install react react-dom`. This will download the necessary react node packages from the npm node package repository and create the following files and folders in `TheABCs/TheABCs-client`: 
 - package.json
 - package-lock.json
@@ -43,9 +43,8 @@ Navigate to `TheABCs/TheABCs-client` in Windows explorer. Right click and select
   - react-dom
   - scheduler
 
-### Make React Base project
-
-In `TheABCs/TheABCs-client/dist`, make a new file called index.html. Open it in notepad++. Add the following to the file:
+### Create index.html as default inital web page
+In `TheABCs/TheABCs-client/dist`, make a new file called index.html. Open it in notepad++. Add the liens below to the file. Notice the script referring to "bundle.js". This file will be created by the client build process later. 
 
 ```
 <!DOCTYPE HTML>
@@ -53,7 +52,7 @@ In `TheABCs/TheABCs-client/dist`, make a new file called index.html. Open it in 
 	<head>
 	  <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>esbuild project</title>
+      <title>The ABC's - Full Stack App</title>
 	  <link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
@@ -71,7 +70,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import AbcHeader from './AbcHeader';
 
-const root = createRoot(document.getElementById('root')!);
+const root = createRoot(document.getElementById('root'));
 root.render(
   <div>
     <AbcHeader />
@@ -103,11 +102,11 @@ function AbcHeader() {
 
 export default AbcHeader;
 ```
-Create and add images to `TheABCs/TheABCs-client/dist/images` folder needed for header `<img />` tags.
+Create and add images to `TheABCs/TheABCs-client/dist/images` folder needed for header `<img />` tags. You can use the images from this repo or crewat your own.
 - logo.png
 - user.png
 
-In `TheABCs/TheABCs-client/dist`, create styles.css and add styles for the header as shown below:
+In `TheABCs/TheABCs-client/dist`, create styles.css and add styles for the header as shown below. I added a gray color for all text to give a default color besides the usual black.
 
 ```
 * { color: #4B5564; }
@@ -124,7 +123,7 @@ In `TheABCs/TheABCs-client/dist`, create styles.css and add styles for the heade
 Now build the application with the following command in the powershell window. This will be the client application build command throughout the project.
 `npx esbuild ./jsx/index.jsx --bundle --outfile="./dist/bundle.js"`
 
-The build process processes the .jsx files and bundles them up into one JavaScript file called `bundle.js' in the dist folder. 
+The npx esbuild command processes the .jsx files and bundles them up into one JavaScript file called `bundle.js' in the dist folder. This is the script file referred to in the index.html file and is delivered to the browser. The .jsx files are not part of the run time.
 
 Let's look at what we've done. In windows explorer, navigate to `TheABCs/TheABCs-client/dist` and double click on index.html. Assuming when you double click the index.html, it opens in an internet browser like Chrome or Edge, you should see a webpage with a header at the top that includes:
 - a logo displayed on the far left
@@ -180,7 +179,7 @@ function LeftsideNav() {
 
 export default LeftsideNav;
 ```
-In styles.css add styles as shown below. This styles the list items.
+In styles.css add styles as shown below. This styles the list items. There are different styles for hover and active that response to mouseover and, eventually, mouse clicks.
 ```
 
 .nav-list {
@@ -205,7 +204,7 @@ In styles.css add styles as shown below. This styles the list items.
 /* Active state: when the user is currently on that page */
 .nav-link.active {
   background-color: #eef2ff; /* Light blue tint */
-  color: #4f46e5;           /* Primary brand color (Indigo) */
+  color: #4f46e5;           /* Primary color (Indigo) */
   font-weight: 600;
 }
 ```
@@ -236,7 +235,7 @@ In styles.css add styles as shown below. This centers the content displayed in t
 }
 ```
 ### Draw an Apple
-Open MS Paint and draw a picture of an apple. Or use the one in this github repository. Save it in `TheABCs/TheABCs-client/dist/images/` folder as `apple.png`. 
+Open MS Paint (or any drawig program) and draw a picture of an apple. Or use the one in this github repository. Save it in `TheABCs/TheABCs-client/dist/images/` folder as `apple.png`. 
 
 ### Build Again and View
 
@@ -252,8 +251,6 @@ Now view the index.html file again in a browser. If it's still open from last ti
 - Left side navigation list with the items listed below. Each should change color has you hover over them with the mouse.
   - Introduction
   - A is for...
-  - B is for...
-  - C is for...
 - A main content page that displays:
 - "A is for..." as the title
 - the drawing of an apple (`apple.png`)
@@ -406,23 +403,23 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => console.log(`Native server at http://localhost:${PORT}`));
 ```
 ### Draw a Boat and a Cat
-Open MS Paint and draw a picutres of a boat and a cat. Or use the ones in this github repository. Save them in `TheABCs/TheABCs-client/dist/images/` folder as `boat.png` and `cat.png`. 
+Create image files of a boat and a cat. Or use the ones in this github repository. Save them in `TheABCs/TheABCs-client/dist/images/` folder as `boat.png` and `cat.png`. 
 
 ### Test the Table of Contents API
 In an internet browser, go to the the link below and verify proper response.
 - url: http://localhost:8080/api/tableOfContents
-  - reponse: `[{"pageId":0,"name":"Introduction"},{"pageId":1,"name":"A is for..."},{"pageId":2,"name":"B is for..."},{"pageId":3,"name":"C is for..."}]`
+  - reponse: `[{"pageId":1,"name":"Introduction"},{"pageId":2,"name":"A is for..."},{"pageId":3,"name":"B is for..."},{"pageId":4,"name":"C is for..."}]`
 - url: http://localhost:8080/api/pagedata/1
-  - response: `{"pageId":0,"name":"Introduction","pageImageLoc":"./images/logo.png","pageText":"This is the intro."}`
+  - response: `{"pageId":1,"name":"Introduction","pageImageLoc":"./images/logo.png","pageText":"This is the intro."}`
 - url: http://localhost:8080/api/pagedata/2
-  - response: `{"pageId":1,"name":"A is for...","pageImageLoc":"./images/apple.png","pageText":"A is for apple."}`
+  - response: `{"pageId":2,"name":"A is for...","pageImageLoc":"./images/apple.png","pageText":"A is for apple."}`
 - url: http://localhost:8080/api/pagedata/3
-  - response: `{"pageId":2,"name":"B is for...","pageImageLoc":"./images/boat.png","pageText":"B is for boat."}`
+  - response: `{"pageId":3,"name":"B is for...","pageImageLoc":"./images/boat.png","pageText":"B is for boat."}`
 - url: http://localhost:8080/api/pagedata/4
-  - response: `{"pageId":3,"name":"C is for...","pageImageLoc":"./images/cat.png","pageText":"C is for cat."}`
+  - response: `{"pageId":4,"name":"C is for...","pageImageLoc":"./images/cat.png","pageText":"C is for cat."}`
 
 ## Add API calls to React Components
-Go back to the client project jsx folder located here: `TheABCs\TheABCS-client\jsx`. The next few tasks will involve chnages to the .jsx files.
+Go back to the client project jsx folder located here: `TheABCs\TheABCS-client\jsx`. The next few tasks will involve changes to the .jsx files.
 
 ### Get table of contents data and display it
 The LeftsideNav component will make an API call to the server we created when it is loaded. The navigation links will be based on the data returned from the table of contents API function.  
@@ -430,7 +427,7 @@ The LeftsideNav component will make an API call to the server we created when it
 
 In the file LeftsideNav.jsx:
 - add useState and useEffect to the react import statement
-- add the code above the return statement to fecth data from the API 
+- add the code "fetch data from the API" section above the return statement
 - modify the html code in the return statement to base the values displayed on the data returned from the API  
   
 The updated LeftsideNav.jsx source code is below.
@@ -439,7 +436,7 @@ import React, { useState, useEffect } from 'react';
 
 function LeftsideNav() {
 
-// ==================== START: fecth data from the API =========================
+// ==================== START: fetch data from the API =========================
 
 	const [tocEntries, setTocEntries] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -467,7 +464,7 @@ function LeftsideNav() {
 
 		fetchTocData();
 	  }, []); 
-	// ==================== END: fecth data from the API =========================
+	// ==================== END: fetch data from the API =========================
 	
 	  if (loading) return <p>Loading...</p>;
 	  if (error) return <p>Error: {error}</p>;
@@ -519,7 +516,7 @@ export default NavAndMainPane;
 In the file LetterPage.jsx:
 - add useState and useEffect to the react import statement
 - add {page_id} property as an input paramter to the LetterPage function.
-- add the code above the return statement to fecth data from the API 
+- add the code "fetch data from the API" section above the return statement.
 - modify the html code in the return statement to base the values displayed on the data returned from the API  
 Make API call from the LetterPage component to retrieve page data from server API. 
 
@@ -528,7 +525,7 @@ import React, { useState, useEffect } from 'react';
 
 function LetterPage({page_id}) {
 	
-	// ==================== START: fecth data from the API =========================
+	// ==================== START: fetch data from the API =========================
 	const [page, setPage] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -556,7 +553,7 @@ function LetterPage({page_id}) {
 
 		fetchUser();
 	}, [page_id]); // The effect re-runs if pageId changes
-	// ==================== END: fecth data from the API =========================
+	// ==================== END: fetch data from the API =========================
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -607,14 +604,14 @@ export default NavAndMainPane;
 ### Update LeftsideNav Component
 In the file LeftsideNav.jsx:
 - add {updateActiveTab, activeTabId} as properties to function LeftsideNav
-- change the <a> element in the return statment to include onClick fucntion and dynamic className
+- change the <a> element in the return statment to include onClick fucntion and dynamic className for styling selcted item.
 
 ```
 import React, { useState, useEffect } from 'react';
 
 function LeftsideNav({updateActiveTab, activeTabId}) {
 
-// ==================== START: fecth data from the API =========================
+// ==================== START: fetch data from the API =========================
 
 	const [tocEntries, setTocEntries] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -642,7 +639,7 @@ function LeftsideNav({updateActiveTab, activeTabId}) {
 
 		fetchTocData();
 	  }, []); 
-	// ==================== END: fecth data from the API =========================
+	// ==================== END: fetch data from the API =========================
 	
 	  if (loading) return <p>Loading...</p>;
 	  if (error) return <p>Error: {error}</p>;
@@ -694,6 +691,7 @@ Find the "play" button. If you hover over it, it will show `exectue script`. Cli
 3       	"B is for..."	"./images/boat.png" 	"B is for boat."
 4       	"C is for..."	"./images/cat.png"  	"C is for cat."
 ```
+Notice the column names are all lowercase and do not match the case we used to define the data in the application. We will need to handle this in the application when the data is retrived from the database.
 
 ## Connect Server to Database
 ### Add DB connection string to .env file

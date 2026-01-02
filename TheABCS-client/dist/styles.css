@@ -34,7 +34,7 @@
 /* Active state: when the user is currently on that page */
 .nav-link.active {
   background-color: #eef2ff; /* Light blue tint */
-  color: #4f46e5;           /* Primary brand color (Indigo) */
+  color: #4f46e5;           /* Primary color (Indigo) */
   font-weight: 600;
 }
 

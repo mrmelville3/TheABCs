@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function LetterPage({page_id}) {
 	
-	// ==================== START: fecth data from the API =========================
+	// ==================== START: fetch data from the API =========================
 	const [page, setPage] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -30,7 +30,7 @@ function LetterPage({page_id}) {
 
 		fetchUser();
 	}, [page_id]); // The effect re-runs if pageId changes
-	// ==================== END: fecth data from the API =========================
+	// ==================== END: fetch data from the API =========================
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
