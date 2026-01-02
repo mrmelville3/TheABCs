@@ -62,7 +62,7 @@ In `TheABCs/TheABCs-client/dist`, make a new file called index.html. Open it in 
 </html>
 ```
 
-### Start Creating compoenents (.jsx files)
+### Start Creating components (.jsx files)
 In `TheABCs/TheABCs-client/jsx`, make index.jsx file with the following contents:
 
 ```
@@ -102,7 +102,7 @@ function AbcHeader() {
 
 export default AbcHeader;
 ```
-Create and add images to `TheABCs/TheABCs-client/dist/images` folder needed for header `<img />` tags. You can use the images from this repo or crewat your own.
+Create and add images to `TheABCs/TheABCs-client/dist/images` folder needed for header `<img />` tags. You can use the images from this repo or create your own.
 - logo.png
 - user.png
 
