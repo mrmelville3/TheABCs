@@ -1,8 +1,8 @@
-# The ABCs - A Simple Full Stack Web Applicaiton
+# The ABCs - A Simple Full Stack Web Application
 This is a full stack web app with client, server, and database . It's an alphabet book. The tech stack is similar to PERN (PostGreSQL, Express, React, Node.js) minus Express. There is also no React framework. One of the goals of this project was to use as few node installs as possible and keep it simple.  
   
 Project goals:
-- Use react and JSX with NO REACT FRAMEWORK (node.js, vue, vite, etc.)
+- Use react and JSX with NO REACT FRAMEWORK (next, vue, vite, etc.)
 - keep npm installs at a minimum
 - Use node.js to manage packages, build, and server implementation
 - use a database
@@ -43,7 +43,7 @@ Navigate to `TheABCs/TheABCs-client` in Windows explorer. Right click in the emp
   - react-dom
   - scheduler
 
-### Create index.html as default inital web page
+### Create index.html as default initial web page
 In `TheABCs/TheABCs-client/dist`, make a new file called index.html. Open it in notepad++. Add the liens below to the file. Notice the script referring to "bundle.js". This file will be created by the client build process later. 
 
 ```
@@ -131,7 +131,7 @@ Let's look at what we've done. In windows explorer, navigate to `TheABCs/TheABCs
 - another image to the right
 
 ### Create navigation and display
-In order to do this you will need a parent component (NavAndMainPane) and two child components (LeftsideNav and LetterPage). One child will be the left-hand navigation menu and the other will be the main display pane for content on the right. Eventually, the navigation clicks will direct the parent component to upate the content displayed in the main display pane.
+In order to do this you will need a parent component (NavAndMainPane) and two child components (LeftsideNav and LetterPage). One child will be the left-hand navigation menu and the other will be the main display pane for content on the right. Eventually, the navigation clicks will direct the parent component to update the content displayed in the main display pane.
 
 In `TheABCs/TheABCs-client/jsx`, create the parent NavAndMainPane.jsx file with the following contents:
 ```
@@ -225,7 +225,7 @@ function LetterPage() {
 
 export default LetterPage;
 ```
-In styles.css add styles as shown below. This centers the content displayed in the content dislpay pane.
+In styles.css add styles as shown below. This centers the content displayed in the content display pane.
 ```
 .letter-page {
   display: flex;
@@ -235,7 +235,7 @@ In styles.css add styles as shown below. This centers the content displayed in t
 }
 ```
 ### Draw an Apple
-Open MS Paint (or any drawig program) and draw a picture of an apple. Or use the one in this github repository. Save it in `TheABCs/TheABCs-client/dist/images/` folder as `apple.png`. 
+Open MS Paint (or any drawing program) and draw a picture of an apple. Or use the one in this github repository. Save it in `TheABCs/TheABCs-client/dist/images/` folder as `apple.png`. 
 
 ### Build Again and View
 
@@ -307,14 +307,14 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => console.log(`Native server at http://localhost:${PORT}`));
 ```
 ### Deploy the React project to the server
-In Windows, copy all of the files from `TheABCs\TheABCs-client\dist` into `TheABCs\TheABCs-server\static`. This is how you 'delpoy' the react applicaiton to the server. So when a web browser makes a request to the server it is delivered to the browser for display.
+In Windows, copy all of the files from `TheABCs\TheABCs-client\dist` into `TheABCs\TheABCs-server\static`. This is how you 'deploy' the react application to the server. So when a web browser makes a request to the server it is delivered to the browser for display.
 
 Start the server using this command: `node TheABCs-nodejs-server.js`. 
 
-Open a new browser (Chrome or Edge) window and go to this url: `http://localhost:8080/`. You should see the appliction displayed with header, left hand nav, and content page to the right.
+Open a new browser (Chrome or Edge) window and go to this url: `http://localhost:8080/`. You should see the application displayed with header, left hand nav, and content page to the right.
 
 ### Create API request handler
-Modify the TheABCs-nodejs-server.js file by adding two code new code sctions. Each starts with the folllowing comment lines:
+Modify the TheABCs-nodejs-server.js file by adding two code new code sections. Each starts with the following comment lines:
 - temporary hard-coded json data
 - API routing
 
@@ -408,7 +408,7 @@ Create image files of a boat and a cat. Or use the ones in this github repositor
 ### Test the Table of Contents API
 In an internet browser, go to the the link below and verify proper response.
 - url: http://localhost:8080/api/tableOfContents
-  - reponse: `[{"pageId":1,"name":"Introduction"},{"pageId":2,"name":"A is for..."},{"pageId":3,"name":"B is for..."},{"pageId":4,"name":"C is for..."}]`
+  - response: `[{"pageId":1,"name":"Introduction"},{"pageId":2,"name":"A is for..."},{"pageId":3,"name":"B is for..."},{"pageId":4,"name":"C is for..."}]`
 - url: http://localhost:8080/api/pagedata/1
   - response: `{"pageId":1,"name":"Introduction","pageImageLoc":"./images/logo.png","pageText":"This is the intro."}`
 - url: http://localhost:8080/api/pagedata/2
@@ -488,7 +488,7 @@ function LeftsideNav() {
 
 export default LeftsideNav;
 ```
-Notice the list of items displayed on the left now includes "B is for..." and "C is for...". You can also see the api call if you open up devloper tools in the browser and look at the network tab. There is a new request for "tableOfContents". This is the API call that returns the data that builds the left-hand navigation list.
+Notice the list of items displayed on the left now includes "B is for..." and "C is for...". You can also see the api call if you open up developer tools in the browser and look at the network tab. There is a new request for "tableOfContents". This is the API call that returns the data that builds the left-hand navigation list.
 
 ### Show page 1 by default
 In the file NavAndMainPane.jsx:
@@ -515,7 +515,7 @@ export default NavAndMainPane;
 ### Get Letter Page Data and display it
 In the file LetterPage.jsx:
 - add useState and useEffect to the react import statement
-- add {page_id} property as an input paramter to the LetterPage function.
+- add {page_id} property as an input parameter to the LetterPage function.
 - add the code "fetch data from the API" section above the return statement.
 - modify the html code in the return statement to base the values displayed on the data returned from the API  
 Make API call from the LetterPage component to retrieve page data from server API. 
@@ -604,7 +604,7 @@ export default NavAndMainPane;
 ### Update LeftsideNav Component
 In the file LeftsideNav.jsx:
 - add {updateActiveTab, activeTabId} as properties to function LeftsideNav
-- change the <a> element in the return statment to include onClick fucntion and dynamic className for styling selcted item.
+- change the <a> element in the return statement to include onClick function and dynamic className for styling selected item.
 
 ```
 import React, { useState, useEffect } from 'react';
@@ -671,7 +671,7 @@ export default LeftsideNav;
 - In the internet browser, go to: http://localhost:8080/
 
 ## Setup Database
-Launch pgAdmin application installed with PostGreSQL. Enter password if prompted. In the left-side navigation tree, go to Servers > PostgreSQL > Databases. Right click on Databases and select `create > Database`. In the Database field type in TheABCs-Database. Leave OID blank. Leave Onwer as postgres. Add comment if you want to.  
+Launch pgAdmin application installed with PostGreSQL. Enter password if prompted. In the left-side navigation tree, go to Servers > PostgreSQL > Databases. Right click on Databases and select `create > Database`. In the Database field type in TheABCs-Database. Leave OID blank. Leave Owner as postgres. Add comment if you want to.  
 
 Right click on TheABCs-Database and select `Query Tool`. In the text editing window add this statement to create the Pages table:
 ```
@@ -682,7 +682,7 @@ CREATE TABLE Pages (
     pageText TEXT
 );
 ```
-Find the "play" button. If you hover over it, it will show `exectue script`. Click it. The table is  created. Delete the CREATE TABLE command and replace it with this select statement: `Select * from Pages`. You shoule see an empty table displayed in the "Data Ouput" window below. Add the following rows to this table using the UI of this view. The rows should look like this:
+Find the "play" button. If you hover over it, it will show `execute script`. Click it. The table is  created. Delete the CREATE TABLE command and replace it with this select statement: `Select * from Pages`. You should see an empty table displayed in the "Data Output" window below. Add the following rows to this table using the UI of this view. The rows should look like this:
 
 ```
 "pageid"	"name"       	"pageimageloc"      	"pagetext"
@@ -691,7 +691,7 @@ Find the "play" button. If you hover over it, it will show `exectue script`. Cli
 3       	"B is for..."	"./images/boat.png" 	"B is for boat."
 4       	"C is for..."	"./images/cat.png"  	"C is for cat."
 ```
-Notice the column names are all lowercase and do not match the case we used to define the data in the application. We will need to handle this in the application when the data is retrived from the database.
+Notice the column names are all lowercase and do not match the case we used to define the data in the application. We will need to handle this in the application when the data is retrieved from the database.
 
 ## Connect Server to Database
 ### Add DB connection string to .env file
@@ -715,10 +715,10 @@ export default pool;
 ### Install dotenv and pg
 Open a terminal in `TheABCs\TheABCs-server\`. Type the following command: `npm install dotenv pg`.
 
-### Add module information to pckage.json
-We need to add this since we are using import statments that are part of the more modern ECMAScript Modules (ESM) instead of the older CommonJS (CJS) method. We didn't need this until installing dotenv and pg. That installation added the package.json file and node_modules folder. Until then we were only importing from packages that are included in the node.js installation. 
+### Add module information to package.json
+We need to add this since we are using import statements that are part of the more modern ECMAScript Modules (ESM) instead of the older CommonJS (CJS) method. We didn't need this until installing dotenv and pg. That installation added the package.json file and node_modules folder. Until then we were only importing from packages that are included in the node.js installation. 
 
-In the folder `TheABCs\TheABCs-server\` open the file package.json and make the following chagnes:
+In the folder `TheABCs\TheABCs-server\` open the file package.json and make the following changes:
 - add name, version, and type above dependencies
 ```
 {
@@ -734,11 +734,11 @@ In the folder `TheABCs\TheABCs-server\` open the file package.json and make the 
 ```
 
 ### Add Database Queries to Server API
-In the folder `TheABCs\TheABCs-server\` open the file TheABCs-nodejs-server.js and make the following chagnes:
+In the folder `TheABCs\TheABCs-server\` open the file TheABCs-nodejs-server.js and make the following changes:
 - add import statement to include db.js
 - remove "temporary hard-coded json data" section
 - modify the code in the API routing section to do database queries instead of using the temporary hardcoded json data for the table of contents. You will need to map the lowercase database column names to the camelCase names used in the rest of the application.
-- Remove the "-1" in this statement: `const recordId = parseInt(urlParts[3]) - 1;`. It was needed to deal with the index of the arrary starting at 0. The database rows start with 1.
+- Remove the "-1" in this statement: `const recordId = parseInt(urlParts[3]) - 1;`. It was needed to deal with the index of the array starting at 0. The database rows start with 1.
 - modify the code in the API routing section to do database queries instead of using the temporary hardcoded json data for the letter page data. The code should look like this:
 
 ```
@@ -845,7 +845,7 @@ server.listen(PORT, () => console.log(`Native server at http://localhost:${PORT}
 
 ## Create Git and GitHub repositories
 ### Create .gitignore file
-In the parent poject folder `TheABCs\` create a file called .gitignore. Add the following lines:
+In the parent project folder `TheABCs\` create a file called .gitignore. Add the following lines:
 ```
 node_modules/
 static/
@@ -857,8 +857,8 @@ dist/bundle.js
 - create no repository as public and NO README file
 - find the url for the repository under the green code button. It should look something like this: `https://github.com/[your-user-id]/TheABCs.git`. Copy it.
 
-### Initilize local git repo
-- open up a terminal in the parent poject folder `TheABCs\`
+### Initialize local git repo
+- open up a terminal in the parent project folder `TheABCs\`
 - Create local git repo: In the terminal type: `git init -b main`
 - Check file list status: In the terminal type: `git status`
 - Add files identified in previous step to the repo: In the terminal type: `git add -A`
@@ -869,4 +869,4 @@ dist/bundle.js
 - link local git repo to GitHub repo: `git remote add origin https://github.com/[your-user-id]/TheABCs.git`
   - This https address is an example. You need to use the one copied from the github website in the previous section.
 - push changes to github: `git push -u origin main`
-NOTE: from this point foward, to checkin the latest changes to github, just use this command: `git push`
+NOTE: from this point forward, to check in the latest changes to github, just use this command: `git push`
